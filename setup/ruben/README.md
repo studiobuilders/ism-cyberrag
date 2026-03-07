@@ -36,6 +36,8 @@ pip install -r requirements.txt
 
 ## 1. Groq API
 
+Groq API is used to access cloud deployed models. It has a free tier of certain limitations. You can check the Groq Free tier limits [here](https://console.groq.com/docs/rate-limits)
+
 **Script:** `scripts/setup_groq.sh`
 
 ### Steps
@@ -62,9 +64,54 @@ python scripts/verify_groq.py
 
 ## 2. Ollama
 
+Local inference engine to run inference on locally hosted models which consumes a bit of compute resources locally.
+
+**Script:** `scripts/setup_ollama.sh`
+
+### Steps
+
+Choose which model you wish to run with ollama. (by default its `llama3.1:8b`)
+Run the setup script (installs Ollama and pulls the selected default model):
+
+```bash
+chmod +x scripts/setup_ollama.sh
+./scripts/setup_ollama.sh
+```
+
+This will:
+- Install the Ollama CLI
+- Start the Ollama service
+- Pull the default model (`llama3.2`)
+
+### Verify
+
+```bash
+python scripts/verify_ollama.py
+```
+
+or
+
+Test it directly on the CLI
+
+```bash
+ollama run llama3.1 "Hello, world!"
+```
+
+### Other Available Models
+
+| Model | Command |
+|---|---|
+| Llama 3.2 (3B) | `ollama pull llama3.2` |
+| Mistral 7B | `ollama pull mistral` |
+| Phi-3 Mini | `ollama pull phi3` |
+| Gemma 2 (2B) | `ollama pull gemma2:2b` |
+
+
 ---
 
 ## 3. ClearML
+
+Cloud based experiment tracking platform used to log and version your metrics, experiments and datasets.
 
 **Script:** `scripts/setup_clearml.sh`
 
@@ -108,6 +155,6 @@ All API keys are stored in a `.env` file (gitignored).
 | Issue | Fix |
 |---|---|
 | `GROQ_API_KEY not set` | Re-run `setup_groq.sh` or manually add key to `.env` |
-
+| `Ollama: connection refused` | Run `ollama serve` in a separate terminal |
 | `ClearML auth failed` | Re-run `clearml-init` or check `~/clearml.conf` |
 | Permission denied on scripts | Run `chmod +x scripts/*.sh` |
