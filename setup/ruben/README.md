@@ -1,6 +1,6 @@
-# AI Environment Setup Guide
+# Inference Setup Guide
 
-This repository contains setup scripts and instructions for configuring the following services:
+This folder contains setup scripts and instructions for configuring the following services:
 
 | Service | Description |
 |---|---|
@@ -57,7 +57,7 @@ chmod +x scripts/setup_groq.sh
 ### Verify
 
 ```bash
-python scripts/verify_groq.py
+python helpers/verify_groq.py
 ```
 
 ---
@@ -86,7 +86,7 @@ This will:
 ### Verify
 
 ```bash
-python scripts/verify_ollama.py
+python helpers/verify_ollama.py
 ```
 
 or
@@ -133,7 +133,7 @@ chmod +x scripts/setup_clearml.sh
 ### Verify
 
 ```bash
-python scripts/verify_clearml.py
+python helpers/verify_clearml.py
 ```
 
 ---
