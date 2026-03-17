@@ -1,0 +1,202 @@
+[
+  {
+    "question": "What are the six functions that group the cyber security principles within the ISM?",
+    "ground_truth": "The cyber security principles are grouped into six functions: govern, identify, protect, detect, respond and recover.",
+    "category": "easy"
+  },
+  {
+    "question": "What is the primary purpose of the Information security manual (ISM)?",
+    "ground_truth": "The purpose of the Information security manual (ISM) is to outline a cyber security framework that an organisation can apply, using their risk management framework, to protect their information technology and operational technology systems from cyber threats.",
+    "category": "easy"
+  },
+  {
+    "question": "Who is the intended audience for the Information security manual?",
+    "ground_truth": "The ISM is intended for chief information security officers (CISOs), chief information officers, cyber security professionals and information technology managers.",
+    "category": "easy"
+  },
+  {
+    "question": "What types of checks does a vulnerability scan perform?",
+    "ground_truth": "A vulnerability scan involves using tools to conduct automated checks for known vulnerabilities in systems, such as missing patches or updates, or the use of weak passwords.",
+    "category": "easy"
+  },
+  {
+    "question": "How often must cyber security awareness training be undertaken by personnel?",
+    "ground_truth": "Cyber security awareness training is undertaken annually by all personnel.",
+    "category": "easy"
+  },
+  {
+    "question": "What is the ISM definition of a cyber security incident?",
+    "ground_truth": "A cyber security incident is an unwanted or unexpected cyber security event, or a series of such events, that either has compromised business operations or has a significant probability of compromising business operations.",
+    "category": "easy"
+  },
+  {
+    "question": "What does the abbreviation AACA stand for?",
+    "ground_truth": "AACA stands for ASD-Approved Cryptographic Algorithm.",
+    "category": "easy"
+  },
+  {
+    "question": "How frequently should a vulnerability scanner be used to identify missing patches for internet-facing servers?",
+    "ground_truth": "A vulnerability scanner is used at least daily to identify missing patches or updates for vulnerabilities in operating systems of internet-facing servers and internet-facing network devices.",
+    "category": "easy"
+  },
+  {
+    "question": "How long must event logs be retained in a searchable manner?",
+    "ground_truth": "Event logs are retained in a searchable manner for at least 12 months.",
+    "category": "easy"
+  },
+  {
+    "question": "When are break glass accounts permitted to be used?",
+    "ground_truth": "Break glass accounts are only used when normal authentication processes cannot be used.",
+    "category": "easy"
+  },
+  {
+    "question": "What is the minimum password length for single-factor authentication on a PROTECTED system?",
+    "ground_truth": "Passwords used for single-factor authentication on non-classified, OFFICIAL: Sensitive and PROTECTED systems are a minimum of 15 characters.",
+    "category": "easy"
+  },
+  {
+    "question": "What action should be taken if IT equipment cannot be sanitised?",
+    "ground_truth": "IT equipment that cannot be sanitised is destroyed.",
+    "category": "easy"
+  },
+  {
+    "question": "What is the purpose of establishing an insider threat mitigation program?",
+    "ground_truth": "Establishing and maintaining an insider threat mitigation program can assist an organisation to detect and respond to insider threats before they occur, or limit damage if they do occur.",
+    "category": "easy"
+  },
+  {
+    "question": "Which cryptographic hashing algorithm is approved for general purpose use?",
+    "ground_truth": "Only SHA-2 hashing algorithms are approved for general purpose use.",
+    "category": "easy"
+  },
+  {
+    "question": "What does the term 'data spill' refer to?",
+    "ground_truth": "A data spill is the accidental or deliberate exposure of data into an uncontrolled or unauthorised environment, or to people without a need-to-know.",
+    "category": "easy"
+  },
+  {
+    "question": "What steps should be taken to handle and contain a malicious code infection?",
+    "ground_truth": "As a priority, all infected systems and media should be isolated to prevent the infection from spreading. Once isolated, infected systems and media can be scanned by antivirus applications to potentially remove the infection or recover data. If the infection cannot be reliably removed, systems are restored from a known good backup or rebuilt.",
+    "category": "medium"
+  },
+  {
+    "question": "How should an organisation secure privately-owned mobile devices accessing OFFICIAL: Sensitive systems?",
+    "ground_truth": "Personnel accessing OFFICIAL: Sensitive or PROTECTED systems or data using privately-owned mobile devices or desktop computers must have enforced separation of classified data from personal data. Furthermore, they are prevented from storing classified data on their privately-owned mobile devices and desktop computers.",
+    "category": "medium"
+  },
+  {
+    "question": "What are the requirements for applying patches to vulnerabilities assessed as critical by vendors in internet-facing servers?",
+    "ground_truth": "Patches, updates or other vendor mitigations for vulnerabilities in operating systems of internet-facing servers and internet-facing network devices are applied within 48 hours of release when vulnerabilities are assessed as critical by vendors or when working exploits exist.",
+    "category": "medium"
+  },
+  {
+    "question": "What specific details must be captured in a cyber security incident register?",
+    "ground_truth": "A cyber security incident register contains the following for each cyber security incident: the date the cyber security incident occurred, the date it was discovered, a description of the incident, any actions taken in response to the incident, and to whom the incident was reported.",
+    "category": "medium"
+  },
+  {
+    "question": "What are the rules regarding the use of Shared User Accounts?",
+    "ground_truth": "The use of shared user accounts is strictly controlled, and personnel using such accounts are uniquely identifiable.",
+    "category": "medium"
+  },
+  {
+    "question": "What happens if an authorising officer determines the security risks associated with a system are unacceptable?",
+    "ground_truth": "If the authorising officer deems the security risks to be unacceptable, they may deny authorisation to operate until such time that sufficient remediation actions have been completed to an acceptable standard. Alternatively, the authorising officer may choose to grant authorisation to operate but with constraints placed on the system's use, such as limiting the system's functionality or specifying an expiration date.",
+    "category": "medium"
+  },
+  {
+    "question": "Under what conditions is it permitted to allow intrusion activity to continue on a system for evidence collection?",
+    "ground_truth": "Legal advice is sought before allowing intrusion activity to continue on a system for the purpose of collecting further data or evidence. System owners are also consulted before allowing intrusion activity to continue on a system.",
+    "category": "medium"
+  },
+  {
+    "question": "What specific types of content filtering checks should be performed on files passing through gateways or Cross Domain Solutions?",
+    "ground_truth": "Files imported or exported via gateways or CDSs undergo content filtering checks. This includes antivirus scanning using multiple different scanning engines, automated dynamic analysis in a sandbox to detect suspicious behaviour, content validation, and verification of digital signatures or cryptographic checksums.",
+    "category": "medium"
+  },
+  {
+    "question": "How should a system administrator manage Break Glass account credentials after they are used?",
+    "ground_truth": "Break glass account credentials are changed by the account custodian after they are accessed by any other party. In addition, break glass accounts are tested after credentials are changed.",
+    "category": "medium"
+  },
+  {
+    "question": "How should SECRET and TOP SECRET cables be terminated to prevent cross-patching?",
+    "ground_truth": "SECRET and TOP SECRET cables are terminated on their own individual patch panels. SECRET cables are terminated in an individual cabinet, or for small systems, a cabinet with a division plate between any SECRET cables and non-SECRET cables. TOP SECRET cables are terminated in an individual TOP SECRET cabinet.",
+    "category": "medium"
+  },
+  {
+    "question": "What must an organisation do when IT equipment reaches its cessation date for support?",
+    "ground_truth": "Applications, operating systems, network devices and networked IT equipment that are no longer supported by vendors are removed or replaced. When they cannot be immediately removed or replaced, compensating controls are implemented until such time that they can be removed or replaced.",
+    "category": "medium"
+  },
+  {
+    "question": "What should personnel do with their mobile devices and removable media upon returning from travelling to high or extreme risk countries?",
+    "ground_truth": "Personnel should sanitise and reset mobile devices, including all removable media; decommission any credentials that left their possession; report if significant doubt exists as to the integrity of any media; reset credentials used with mobile devices; and monitor user accounts for any indicators of compromise, such as failed logon attempts.",
+    "category": "medium"
+  },
+  {
+    "question": "How does the ISM recommend protecting data processed by Multifunction Devices (MFDs)?",
+    "ground_truth": "Users authenticate to MFDs before they can print, scan or copy documents. MFDs must not be connected to digital telephone systems, and the use of MFDs for printing, scanning and copying purposes, including the capture of shadow copies, must be centrally logged. Additionally, mobile devices encrypt their internal storage, which applies similarly to the storage handling context.",
+    "category": "medium"
+  },
+  {
+    "question": "What security practices should software developers implement regarding the use of third-party libraries?",
+    "ground_truth": "The authoritative source for software restricts the use and import of third-party libraries and software components to trustworthy sources. All software artefacts are scanned for malicious code before being imported into the authoritative source for software, including all compiled code, third-party libraries and software components.",
+    "category": "medium"
+  },
+  {
+    "question": "What measures are required to secure an outsourced cloud service hosting SECRET data?",
+    "ground_truth": "Only community or private clouds are used for outsourced SECRET and TOP SECRET cloud services. Outsourced cloud service providers and their SECRET cloud services undergo an IRAP assessment at least every 24 months. Additionally, systems are not accessed or administered by a service provider unless a contractual arrangement exists to do so.",
+    "category": "medium"
+  },
+  {
+    "question": "What are the differences in security assessment requirements and authorisation processes for a PROTECTED system versus a TOP SECRET system?",
+    "ground_truth": "For PROTECTED systems, security assessments can be undertaken by an organisation's own assessors or IRAP assessors, and the system owner obtains authorisation to operate from its authorising officer. For TOP SECRET systems, security assessments must be undertaken by ASD assessors (or their delegates), and the system owner obtains authorisation to operate from the Director-General ASD (or their delegate).",
+    "category": "hard"
+  },
+  {
+    "question": "Compare the media sanitisation requirements for volatile media across non-classified/PROTECTED systems and SECRET/TOP SECRET systems.",
+    "ground_truth": "For non-classified, OFFICIAL: Sensitive, PROTECTED, SECRET and TOP SECRET systems, volatile media is sanitised by removing its power for at least 10 minutes. However, an additional requirement exists for SECRET and TOP SECRET volatile media, which is sanitised by overwriting it at least once in its entirety with a random pattern followed by a read back for verification.",
+    "category": "hard"
+  },
+  {
+    "question": "How does the ISM define the different password length requirements for multi-factor authentication across different system classifications?",
+    "ground_truth": "Passwords used for multi-factor authentication on non-classified, OFFICIAL: Sensitive and PROTECTED systems are a minimum of 6 characters. Passwords used for multi-factor authentication on SECRET systems are a minimum of 8 characters. Passwords used for multi-factor authentication on TOP SECRET systems are a minimum of 10 characters.",
+    "category": "hard"
+  },
+  {
+    "question": "What are the differing administrative restrictions placed on foreign nationals depending on whether the data classification is AUSTEO or AGAO?",
+    "ground_truth": "Foreign nationals, including seconded foreign nationals, do not have privileged access to systems that process, store or communicate AUSTEO or REL data. For AGAO data, foreign nationals, excluding seconded foreign nationals, do not have privileged access to systems, which means seconded foreign nationals may be permitted.",
+    "category": "hard"
+  },
+  {
+    "question": "Synthesize the timeline requirements for applying critical vulnerability patches to internet-facing server applications versus non-critical patches to office productivity suites.",
+    "ground_truth": "Patches, updates or other vendor mitigations for vulnerabilities in operating systems of internet-facing servers and internet-facing network devices are applied within 48 hours of release when vulnerabilities are assessed as critical by vendors or when working exploits exist. Conversely, patches, updates or other vendor mitigations for vulnerabilities in office productivity suites, web browsers and their extensions, email clients, PDF applications, and security products are applied within two weeks of release.",
+    "category": "hard"
+  },
+  {
+    "question": "How do I write a Python script to automate the deployment of AWS EC2 instances for my web application?",
+    "ground_truth": "This question is outside the scope of the ISM.",
+    "category": "out_of_scope"
+  },
+  {
+    "question": "Can you explain the specific technical differences between NIST SP 800-53 Revision 5 and the ISO/IEC 27001:2022 standards for an American federal agency?",
+    "ground_truth": "This question is outside the scope of the ISM.",
+    "category": "out_of_scope"
+  },
+  {
+    "question": "What is the optimal subnet mask and IP routing table configuration for a Cisco Catalyst 9000 series switch running OSPF?",
+    "ground_truth": "This question is outside the scope of the ISM.",
+    "category": "out_of_scope"
+  },
+  {
+    "question": "How do I install and configure the Apache web server on an Ubuntu 22.04 Linux machine?",
+    "ground_truth": "This question is outside the scope of the ISM.",
+    "category": "out_of_scope"
+  },
+  {
+    "question": "What is the best memory allocation strategy to prevent garbage collection pauses in a highly concurrent Java application?",
+    "ground_truth": "This question is outside the scope of the ISM.",
+    "category": "out_of_scope"
+  }
+]
