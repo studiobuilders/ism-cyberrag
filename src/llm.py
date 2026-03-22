@@ -53,7 +53,7 @@ Question: {question}"""
         client = OpenAI(base_url=f"{OLLAMA_BASE_URL}/v1", api_key="ollama")
         
         response = client.chat.completions.create(
-            model="llama3.1:8b", # using standard ollama tag
+            model=LLM_MODEL_NAME, # using model from config
             messages=messages,
             temperature=0.1,
         )

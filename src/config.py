@@ -14,9 +14,19 @@ SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY", "")
 # ── Groq ──────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
-# ── LLM Provider ──────────────────────────────────────────
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq") # 'groq' or 'ollama'
+# ── Ollama ────────────────────────────────────────────────
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
+# ── Main LLM (for generating answers to questions) ───────
+# Change these in .env — values below are only fallback defaults
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq")
+LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "llama-3.1-8b-instant")
+
+# ── Evaluation LLM (for RAGAS metric scoring) ────────────
+# Change these in .env — values below are only fallback defaults
+# These are INDEPENDENT from the main LLM settings above.
+EVAL_LLM_PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "ollama")
+EVAL_LLM_MODEL = os.getenv("EVAL_LLM_MODEL", "llama3.1:8b")
 
 # ── ClearML ───────────────────────────────────────────────
 # ClearML SDK auto-reads these env vars when Task.init() is called:
@@ -26,10 +36,9 @@ OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 CLEARML_PROJECT = "ISM-CyberRAG"
 CLEARML_TASK = "Sprint 1 – Baseline RAG"
 
-# ── Models ────────────────────────────────────────────────
+# ── Embedding Models ─────────────────────────────────────
 EMBEDDING_MODEL_NAME = "nomic-ai/nomic-embed-text-v1.5"
 EMBEDDING_DIMENSION = 768
-LLM_MODEL_NAME = "llama-3.1-8b-instant"
 
 # ── RAG Parameters ────────────────────────────────────────
 CHUNK_SIZE = 1000       # characters
