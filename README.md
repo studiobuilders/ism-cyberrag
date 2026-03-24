@@ -10,7 +10,7 @@ Built as a university capstone project across three development sprints.
 ism-cyberrag/
 ├── data/                    # ISM PDF documents (01–25)
 ├── evaluations/             # Evaluation datasets (JSON)
-│   └── eval_questions.json  # 20 Q&A pairs for RAGAS evaluation
+│   └── eval_questions.json  # 100 Q&A pairs for RAGAS evaluation
 ├── notebooks/
 │   └── sprint1_poc.ipynb    # Sprint 1 POC notebook
 ├── src/
@@ -130,11 +130,12 @@ When you run `Task.init()` in the notebook, it connects to ClearML and creates a
 
 ## Evaluation
 
-The evaluation dataset (`evaluations/eval_questions.json`) contains 20 questions across four categories:
-- **Easy** (5): Direct control lookups
-- **Medium** (7): Cross-section queries
-- **Hard** (5): Reasoning and comparison questions
-- **Out of scope** (3): Guardrail test questions
+The evaluation dataset (`evaluations/eval_questions.json`) contains 100 questions across five categories:
+- **Easy** (30): Direct control lookups
+- **Medium** (30): Cross-section queries
+- **Hard** (20): Reasoning and comparison questions
+- **Very Hard** (10): Scenario-based synthesis across multiple ISM sections
+- **Out of scope** (10): Guardrail test questions
 
 Sprint 1 RAGAS targets:
 
