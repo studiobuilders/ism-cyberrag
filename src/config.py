@@ -18,12 +18,12 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
 # ── Main LLM (for generating answers to questions) ───────
-# Change these in .env — values below are only fallback defaults
+# Change these in .env. Values below are only fallback defaults.
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq")
 LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "llama-3.1-8b-instant")
 
 # ── Evaluation LLM (for RAGAS metric scoring) ────────────
-# Change these in .env — values below are only fallback defaults
+# Change these in .env. Values below are only fallback defaults.
 # These are INDEPENDENT from the main LLM settings above.
 EVAL_LLM_PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "ollama")
 EVAL_LLM_MODEL = os.getenv("EVAL_LLM_MODEL", "llama3.1:8b")
@@ -32,18 +32,30 @@ EVAL_LLM_MODEL = os.getenv("EVAL_LLM_MODEL", "llama3.1:8b")
 # ClearML SDK auto-reads these env vars when Task.init() is called:
 #   CLEARML_API_ACCESS_KEY, CLEARML_API_SECRET_KEY
 #   CLEARML_API_HOST, CLEARML_WEB_HOST, CLEARML_FILES_HOST
-# No need to reference them in code — just set them in .env
+# No need to reference them in code. Just set them in .env.
 CLEARML_PROJECT = "ISM-CyberRAG"
-CLEARML_TASK = "Sprint 1 – Baseline RAG"
+CLEARML_TASK = "Sprint 2 - ISM-Aware Chunking + Hybrid Search + Reranking"
 
 # ── Embedding Models ─────────────────────────────────────
 EMBEDDING_MODEL_NAME = "nomic-ai/nomic-embed-text-v1.5"
 EMBEDDING_DIMENSION = 768
 
 # ── RAG Parameters ────────────────────────────────────────
-CHUNK_SIZE = 1000       # characters
-CHUNK_OVERLAP = 200     # characters
-MATCH_COUNT = 5         # top-k retrieval
+CHUNK_SIZE = 1000       # characters (Sprint 1 fixed-size, kept for reference)
+CHUNK_OVERLAP = 200     # characters (Sprint 1 fixed-size, kept for reference)
+MATCH_COUNT = 5         # final top-k after reranking
+
+# ── Sprint 2: ISM-Aware Chunking ─────────────────────────
+CHUNK_MIN_WORDS = 100   # merge chunks smaller than this
+CHUNK_MAX_WORDS = 800   # split chunks larger than this
+
+# ── Sprint 2: Hybrid Search ──────────────────────────────
+INITIAL_RETRIEVE_COUNT = 10  # retrieve this many from hybrid search before reranking
+RRF_K = 50              # RRF constant (as per sprint 2 plan)
+
+# ── Sprint 2: Cross-Encoder Reranking ────────────────────
+RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+RERANK_TOP_K = 5        # keep top-k after reranking
 
 # ── Paths ─────────────────────────────────────────────────
 PROJECT_ROOT = str(_project_root)
