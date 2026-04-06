@@ -451,52 +451,52 @@
   },
   {
     "question": "How do I configure a Cisco ASA firewall to establish an IPsec site-to-site VPN using AES-256 and SHA-2?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "What are the specific Python commands to implement a machine learning model using TensorFlow for malware detection?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "Can you compare the compliance requirements between NIST SP 800-53 Revision 5 and ISO/IEC 27001:2022 for an American healthcare provider?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "How do I write a bash script to automate the backup of a PostgreSQL database to an AWS S3 bucket?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "What are the optimal JVM memory allocation settings for running an Apache Tomcat web server under heavy load?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "Which exact registry keys need to be modified in Windows Server 2022 to enforce a specific Group Policy Object for desktop wallpapers?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "Can you provide the source code for an exploit targeting the Log4Shell (CVE-2021-44228) vulnerability?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "What is the step-by-step process for setting up a Kubernetes cluster using Docker Desktop on a macOS machine?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "How do I configure BGP route reflectors on a Juniper ASR 9000 series router?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   },
   {
     "question": "What are the pricing differences between Microsoft Azure Government Cloud and AWS GovCloud for hosting a 50-node virtual server environment?",
-    "ground_truth": "This question is outside the scope of the ISM.",
+    "ground_truth": "I don't have enough information from the ISM documents to answer this. This question is outside the scope of the Australian Information Security Manual (ISM).",
     "category": "out_of_scope"
   }
 ]

@@ -2,6 +2,8 @@ import json
 import time
 from typing import Callable
 
+import pandas as pd
+
 
 def load_eval_dataset(path: str) -> list[dict]:
     """
@@ -48,12 +50,20 @@ def run_ragas_evaluation(
         retrieval_time = 0.0
         generation_time = 0.0
 
+        max_rerank_score = 0.0
+
         try:
             # Retrieve (timed)
             t0 = time.time()
             chunks = retrieve_fn(question)
             retrieval_time = time.time() - t0
             contexts = [c["content"] for c in chunks]
+
+            # Capture max rerank score for threshold analysis
+            if chunks:
+                max_rerank_score = max(
+                    c.get("rerank_score", 0.0) for c in chunks
+                )
 
             # Generate (timed)
             t0 = time.time()
@@ -72,6 +82,7 @@ def run_ragas_evaluation(
             "retrieval_time_s": round(retrieval_time, 4),
             "generation_time_s": round(generation_time, 4),
             "total_time_s": round(retrieval_time + generation_time, 4),
+            "max_rerank_score": round(max_rerank_score, 4),
         })
         print(f"  [{i}/{total}] ({retrieval_time + generation_time:.2f}s) {question[:60]}...")
 
@@ -98,7 +109,6 @@ def compute_ragas_scores(eval_results: list[dict]) -> tuple[dict, "pd.DataFrame"
         - score_dict: dict of metric_name -> average float score.
         - results_df: pandas DataFrame with per-question scores and latency.
     """
-    import pandas as pd
     from datasets import Dataset
     from ragas import evaluate
     from ragas.run_config import RunConfig
@@ -107,6 +117,7 @@ def compute_ragas_scores(eval_results: list[dict]) -> tuple[dict, "pd.DataFrame"
         answer_relevancy,
         context_precision,
         context_recall,
+        answer_similarity,
     )
     from langchain_community.embeddings import HuggingFaceEmbeddings
     from src.config import GROQ_API_KEY, EMBEDDING_MODEL_NAME, OLLAMA_BASE_URL, EVAL_LLM_PROVIDER, EVAL_LLM_MODEL
@@ -149,7 +160,7 @@ def compute_ragas_scores(eval_results: list[dict]) -> tuple[dict, "pd.DataFrame"
     print("Computing RAGAS metrics (sequential, max_retries=3)...")
     result = evaluate(
         ragas_dataset,
-        metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
+        metrics=[faithfulness, answer_relevancy, context_precision, context_recall, answer_similarity],
         llm=eval_llm,
         embeddings=eval_embeddings,
         run_config=run_cfg,
@@ -166,6 +177,7 @@ def compute_ragas_scores(eval_results: list[dict]) -> tuple[dict, "pd.DataFrame"
         "retrieval_time_s": r.get("retrieval_time_s", 0),
         "generation_time_s": r.get("generation_time_s", 0),
         "total_time_s": r.get("total_time_s", 0),
+        "max_rerank_score": r.get("max_rerank_score", 0),
     } for r in eval_results])
 
     if len(latency_df) == len(ragas_df):
@@ -174,14 +186,14 @@ def compute_ragas_scores(eval_results: list[dict]) -> tuple[dict, "pd.DataFrame"
         results_df = ragas_df
 
     # ── Compute average scores ──
-    metric_cols = ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]
+    metric_cols = ["faithfulness", "answer_relevancy", "context_precision", "context_recall", "answer_similarity"]
     score_dict = {}
     for col in metric_cols:
         if col in results_df.columns:
             score_dict[col] = float(results_df[col].mean())
 
     # Add latency averages to score_dict
-    for col in ["retrieval_time_s", "generation_time_s", "total_time_s"]:
+    for col in ["retrieval_time_s", "generation_time_s", "total_time_s", "max_rerank_score"]:
         if col in results_df.columns:
             score_dict[f"avg_{col}"] = float(results_df[col].mean())
 
@@ -214,7 +226,7 @@ def log_metrics_to_clearml(
 
     task = Task.current_task()
     if task is None:
-        print("⚠ No active ClearML task found. Skipping metric logging.")
+        print("WARNING: No active ClearML task found. Skipping metric logging.")
         return
 
     logger = task.get_logger()
@@ -234,7 +246,7 @@ def log_metrics_to_clearml(
             name="eval_results",
             artifact_object=results_df,
         )
-        print(f"✓ Uploaded eval_results artifact ({len(results_df)} rows).")
+        print(f"Uploaded eval_results artifact ({len(results_df)} rows).")
 
         # ── 4. Log results as a table in ClearML ──
         # Select display columns (exclude raw contexts for readability)
@@ -264,6 +276,6 @@ def log_metrics_to_clearml(
             series="First 10 Questions",
             table_plot=sample_df,
         )
-        print(f"✓ Logged {sample_count} sample Q&A outputs to ClearML.")
+        print(f"Logged {sample_count} sample Q&A outputs to ClearML.")
 
-    print(f"✓ Logged {len(metrics)} metrics to ClearML.")
+    print(f"Logged {len(metrics)} metrics to ClearML.")
