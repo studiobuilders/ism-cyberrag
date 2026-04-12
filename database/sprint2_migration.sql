@@ -1,54 +1,16 @@
--- Enable extensions
-create extension if not exists vector;
+-- Sprint 2 Migration: Add full-text search and hybrid search RPC
+-- Run this against an existing Sprint 1 database to upgrade it.
+-- If setting up fresh, use schema.sql instead (it includes everything).
 
--- Documents table
-create table documents (
-  id bigserial primary key,
-  title text not null,
-  source_file text not null,
-  content text,
-  created_at timestamptz default now()
-);
+-- 1. Add generated tsvector column for full-text search
+alter table chunks
+  add column if not exists fts tsvector
+  generated always as (to_tsvector('english', content)) stored;
 
--- Chunks table with vector column and full-text search
-create table chunks (
-  id bigserial primary key,
-  document_id bigint references documents(id),
-  content text not null,
-  control_id text,
-  category text,
-  sub_topic text,
-  applicability text[],
-  essential_8 text,
-  revision int,
-  embedding vector(768),
-  fts tsvector generated always as (to_tsvector('english', content)) stored,
-  created_at timestamptz default now()
-);
+-- 2. Add GIN index for fast full-text search
+create index if not exists chunks_fts_idx on chunks using gin (fts);
 
--- Indexes
-create index on chunks using hnsw (embedding vector_cosine_ops);
-create index on chunks using gin (fts);
-
--- Sprint 1: Vector-only search (kept for backward compatibility)
-create or replace function match_chunks(
-  query_embedding vector(768),
-  match_count int default 5
-)
-returns table (
-  id bigint, content text, control_id text,
-  category text, similarity float
-)
-language sql as $$
-  select id, content, control_id, category,
-         1 - (embedding <=> query_embedding) as similarity
-  from chunks
-  order by embedding <=> query_embedding
-  limit match_count;
-$$;
-
--- Sprint 2: Hybrid search combining vector similarity and BM25 full-text search
--- Uses Reciprocal Rank Fusion (RRF) to merge both ranked lists
+-- 3. Create hybrid search RPC combining vector + BM25 with RRF
 create or replace function hybrid_search(
   query_text text,
   query_embedding vector(768),
