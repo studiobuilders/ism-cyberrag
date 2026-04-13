@@ -37,7 +37,7 @@ def parse_all_pdfs(data_dir: str) -> list[dict]:
             "title": title,
             "text": text,
         })
-        print(f"  ✓ {filename} ({len(text):,} chars)")
+        print(f"  Parsed {filename} ({len(text):,} chars)")
 
     print(f"\nParsed {len(documents)} documents, "
           f"{sum(len(d['text']) for d in documents):,} total characters")
