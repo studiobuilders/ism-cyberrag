@@ -1,4 +1,3 @@
-import os
 from supabase import create_client
 
 
@@ -24,7 +23,6 @@ def insert_chunks(client, chunks: list[dict], table_name: str = "chunks"):
     Each dict should have at minimum:
         - content (str)
         - embedding (list[float])
-        - metadata  (dict, optional)
 
     The Supabase pgvector column accepts the embedding as a plain list.
     """
@@ -37,7 +35,7 @@ def upsert_document(client, doc: dict, table_name: str = "documents"):
     Inserts a document record into the documents table.
 
     Args:
-        doc: dict with keys title, source_file, content, metadata.
+        doc: dict with keys title, source_file, content.
     """
     response = client.table(table_name).insert(doc).execute()
     return response
@@ -57,4 +55,4 @@ def clear_all_data(client):
     # Delete chunks first because they reference documents
     client.table("chunks").delete().neq("id", -1).execute()
     client.table("documents").delete().neq("id", -1).execute()
-    print("✓ All data cleared from Supabase.")
+    print("All data cleared from Supabase.")

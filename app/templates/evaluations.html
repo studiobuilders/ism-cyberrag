@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluations | Informational Security Manual</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="overflow-y: auto;">
+    
+    <!-- Top Header -->
+    <div class="header-container">
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="brand-section">
+                <div class="brand-title">ISM CyberRAG</div>
+                <div class="brand-subtitle">Information Security Manual<br>Semantic Search Engine</div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="/">Search ISM</a>
+                <a href="/evaluations" class="active">Performance Evaluations</a>
+            </nav>
+        </header>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner" style="padding: 3rem 2rem;">
+        <div class="hero-content">
+            <h1 style="font-size: 2.2rem;">System Performance Matrix</h1>
+            <p style="font-size: 1.1rem; max-width: 800px;">
+                Measuring the hybrid search and reranking architecture against 100 benchmark queries (90 in-scope, 10 out-of-scope) using RAGAS.
+            </p>
+        </div>
+    </div>
+
+    <div class="evaluations-container">
+        <div class="chart-grid">
+            <div class="chart-card" style="grid-column: 1 / -1;">
+                <h3>Overall Quality Metrics (All vs In-Scope vs OOS)</h3>
+                <img src="/static/evaluations/sprint2_inscope_vs_oos.png" alt="RAGAS Metrics Comparison">
+            </div>
+
+            <div class="chart-card" style="grid-column: 1 / -1;">
+                <h3>Out-of-Scope (OOS) Handling Quality</h3>
+                <img src="/static/evaluations/sprint2_oos_detail.png" alt="OOS Rejection Quality">
+            </div>
+
+            <div class="chart-card">
+                <h3>Category Breakdown</h3>
+                <img src="/static/evaluations/sprint2_category_breakdown.png" alt="Scores by difficulty">
+            </div>
+
+            <div class="chart-card">
+                <h3>System Latency Distribution</h3>
+                <img src="/static/evaluations/sprint2_latency.png" alt="Latency">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

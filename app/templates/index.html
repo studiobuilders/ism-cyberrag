@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Security Manual | ASD</title>
+    <!-- Standard system fonts mapped in CSS, no external fonts required for official look -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="header-container">
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="brand-section">
+                <div class="brand-title">ISM CyberRAG</div>
+                <div class="brand-subtitle">Information Security Manual<br>Semantic Search Engine</div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="/" class="active">Search ISM</a>
+                <!-- <a href="/evaluations">Performance Evaluations</a> -->
+            </nav>
+        </header>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h1>Information security manual</h1>
+            <p>Query the Australian guidelines for cyber security framework and risk management using natural language.</p>
+        </div>
+    </div>
+
+    <!-- Main Application Container -->
+    <main class="container">
+        
+        <!-- Left Column: Search & Results -->
+        <div class="main-content">
+            <div class="search-container">
+                <h2>Search the ISM Knowledge Base</h2>
+                <form id="search-form" class="search-form">
+                    <input type="text" id="question" class="search-input"
+                           placeholder="e.g., How do I configure a Cisco ASA firewall for IPsec?"
+                           autocomplete="off" required>
+                    <button type="submit" id="submit-btn" class="btn-submit">
+                        <span id="btn-text">Search</span>
+                        <div id="loading" class="spinner"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="answer-section" class="answer-section">
+                <h3 class="answer-header">Response</h3>
+                <div id="answer-text" class="answer-text">
+                    <!-- LLM Answer goes here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Citations Sidebar -->
+        <aside class="sidebar">
+            <h3>Reference Documents <span id="chunk-count" class="badge-count" style="display: none;">0</span></h3>
+            
+            <div id="citations-list" class="citations-list">
+                <div class="empty-citations" id="empty-state">
+                    No documents retrieved yet. Perform a search to view evidence.
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <script>
+        const form = document.getElementById('search-form');
+        const questionInput = document.getElementById('question');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const loading = document.getElementById('loading');
+        
+        const answerSection = document.getElementById('answer-section');
+        const answerText = document.getElementById('answer-text');
+        
+        const citationsList = document.getElementById('citations-list');
+        const emptyState = document.getElementById('empty-state');
+        const chunkCount = document.getElementById('chunk-count');
+
+        // Simple formatter
+        function formatText(text) {
+            if (!text) return "";
+            return text.split('\n\n').map(p => {
+                p = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                return `<p>${p}</p>`;
+            }).join('');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const question = questionInput.value.trim();
+            if (!question) return;
+
+            // UI Loading State
+            btnText.style.display = 'none';
+            loading.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            answerSection.style.display = 'none';
+            citationsList.innerHTML = '';
+            chunkCount.style.display = 'none';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({question: question}),
+                });
+
+                if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+                const data = await response.json();
+
+                // Display Answer
+                answerText.innerHTML = formatText(data.answer);
+                answerSection.style.display = 'block';
+
+                // Display Citations
+                if (data.chunks && data.chunks.length > 0) {
+                    emptyState.style.display = 'none';
+                    chunkCount.textContent = data.chunks.length;
+                    chunkCount.style.display = 'inline-block';
+                    
+                    data.chunks.forEach((chunk, i) => {
+                        const card = document.createElement('div');
+                        card.className = 'citation-card';
+
+                        let tagsHtml = '';
+                        if (chunk.control_id) tagsHtml += `<span class="tag control">${chunk.control_id}</span>`;
+                        if (chunk.category) tagsHtml += `<span class="tag category">${chunk.category}</span>`;
+
+                        let scoresHtml = chunk.rerank_score != null 
+                            ? `Rerank Score: <strong>${chunk.rerank_score.toFixed(3)}</strong>` 
+                            : '';
+                        
+                        card.innerHTML = `
+                            <div class="citation-meta">${tagsHtml}</div>
+                            <div class="citation-scores">${scoresHtml}</div>
+                            <div class="citation-text" title="${chunk.content}">${chunk.content}</div>
+                        `;
+                        citationsList.appendChild(card);
+                    });
+                } else {
+                    citationsList.appendChild(emptyState);
+                    emptyState.style.display = 'block';
+                    emptyState.textContent = 'No relevant documents found.';
+                }
+
+            } catch (err) {
+                answerText.innerHTML = `<p style="color:red">Failed to connect: ${err.message}</p>`;
+                answerSection.style.display = 'block';
+            } finally {
+                btnText.style.display = 'inline-block';
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

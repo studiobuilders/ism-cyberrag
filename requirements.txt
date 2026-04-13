@@ -1,18 +1,30 @@
+# Core
 pypdf>=4.0.0
 supabase>=2.0.0
 python-dotenv>=1.0.0
 sentence-transformers>=2.2.0
-# Adding openai for Ollama API compatibility
 openai
-# Adding langchain-community for Ollama support in RAGAS
-langchain-community
 groq>=0.4.0
-clearml>=1.14.0
+
+# RAGAS evaluation
+langchain-community
 ragas>=0.1.0
 langchain>=0.1.0
 langchain-groq>=0.1.0
+
+# Experiment tracking
+clearml>=1.14.0
+
+# Data
 pandas>=2.0.0
 numpy>=1.24.0
 matplotlib>=3.7.0
+
+# Notebook
 ipywidgets>=8.0.0
 einops>=0.7.0
+
+# Sprint 2: FastAPI web app
+fastapi>=0.110.0
+uvicorn>=0.27.0
+jinja2>=3.1.0
